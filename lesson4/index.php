@@ -8,20 +8,37 @@ function getMaxNumber($arr){
 			$max = $arr[$i];
 		}
 	}
-
-	echo $max;
+	return $max;
 }
 
 // viết hàm tìm số chia hết cho cả 3 và 5 đầu tiên trong mảng
 function b2($arr){
-
-	// echo số chia hết cho 3&5 đầu tiên
+	foreach ($arr as $value) {
+		if($value%3==0 && $value%5==0){
+			echo "<br>Số chia hết cho cả 3&5 đầu tiên là: $value";
+			break;
+		}
+	}
 }
 
-$numberArrray = [4,549,2,45,10,100,60,201];
+// viết hàm lọc ra các số nguyên tố và trả về
+function soNguyenTo($arr){
+	$result = [];
+	// TODO viet code trong nay
 
-getMaxNumber($numberArrray);
 
+	return $result;
+}
+
+
+$numberArrray = [4,15,2,45,10,100,60,201];
+
+$maximum = getMaxNumber($numberArrray);
+echo "Số lớn nhất là: $maximum";
+b2($numberArrray);
+
+$mangNguyenTo = soNguyenTo($numberArrray);
+var_dump($mangNguyenTo);
 
 
  ?>
