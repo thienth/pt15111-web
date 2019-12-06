@@ -12,6 +12,13 @@ $full_name = $_POST['full_name'];
 $gender = $_POST['gender'];
 $address = $_POST['address'];
 
+$file = $_FILES['avatar'];
+$filename = "";
+if($file['size'] > 0){
+	$filename = "uploads/" . uniqid() . "-" . $file['name'];
+	move_uploaded_file($file['tmp_name'], $filename);
+}
+
 $insertUserQuery = "insert into users 
 						(email, 
 						password, 
@@ -25,7 +32,7 @@ $insertUserQuery = "insert into users
 						'$password', 
 						'$full_name', 
 
-						null, 
+						'$filename', 
 						$gender, 
 						'$address');";
 

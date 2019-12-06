@@ -5,7 +5,7 @@
 </head>
 <body>
 
-	<form action="post_signup.php" method="post" >
+	<form action="post_signup.php" method="post" enctype="multipart/form-data">
 		<div>
 			Email: <input type="email" name="email"/>
 		</div>
