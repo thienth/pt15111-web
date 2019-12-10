@@ -7,6 +7,39 @@ unset($_SESSION['AUTH']);
 $formEmail = $_POST['email'];
 $formPassword = $_POST['password'];
 
+// thực hiện validate dữ liệu
+$emailErr = "";
+$pwdErr = "";
+
+if(strlen($formEmail) == 0){
+	$emailErr = "Vui lòng nhập email";
+}
+
+if($emailErr == "" && strlen($formEmail) < 6){
+	$emailErr = "Không đúng định dạng email";
+}
+
+$countSpecialChar = 0;
+for($i = 0; $i < strlen($formEmail); $i++){
+	if($formEmail[$i] == "@"){
+		$countSpecialChar ++;
+	}
+}
+
+if($emailErr == "" && $countSpecialChar != 1){
+	$emailErr = "Không đúng định dạng email (chỉ có 1 ký tự @)";
+}
+
+
+if(strlen($formPassword) == 0){
+	$pwdErr = "Vui lòng nhập mật khẩu";
+}
+
+if($emailErr != "" || $pwdErr != ""){
+	header("location: login.php?emailErr=$emailErr&pwdErr=$pwdErr");
+	die;
+}
+
 $selectUserQuery = "select * 
 					from users 
 					where email = '$formEmail'
@@ -22,11 +55,9 @@ $connect = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8",
 $stmt = $connect->prepare($selectUserQuery);
 $stmt->execute();
 $user = $stmt->fetch();
-// echo "<pre>";
-// var_dump($user);die;
 
 if($user === false){
-	header('location: login.php?msg=Sai thông tin tài khoản');	
+	header('location: login.php?msg=Sai thông tin tài khoản/mật khẩu');	
 	die;
 }
 
