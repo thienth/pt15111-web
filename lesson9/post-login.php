@@ -11,14 +11,17 @@ $formPassword = $_POST['password'];
 $emailErr = "";
 $pwdErr = "";
 
+// kiểm tra rỗng
 if(strlen($formEmail) == 0){
 	$emailErr = "Vui lòng nhập email";
 }
 
+// số lượng ký tự phải >= 6
 if($emailErr == "" && strlen($formEmail) < 6){
 	$emailErr = "Không đúng định dạng email";
 }
 
+// chỉ cho phép có 1 ký tự @
 $countSpecialChar = 0;
 for($i = 0; $i < strlen($formEmail); $i++){
 	if($formEmail[$i] == "@"){
